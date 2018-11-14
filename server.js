@@ -2,10 +2,10 @@ const express = require("express");
 const hbs = require("hbs");
 const request = require('request');
 const fs = require('fs');
-const port - process.env.PORT || 8080;
 
 var app = express();
 var url = '';
+var port = process.env.PORT || 8080;
 var getPhoto = () => {
 	return new Promise((resolve, reject) => {
 		request({
