@@ -2,6 +2,7 @@ const express = require("express");
 const hbs = require("hbs");
 const request = require('request');
 const fs = require('fs');
+const port - process.env.PORT || 8080;
 
 var app = express();
 var url = '';
@@ -82,6 +83,6 @@ app.get('/image', (request,response) => {
 	})
 })
 
-app.listen(8080, () => {
+app.listen(port, () => {
 	console.log('Server is up on port 8080');
 })
