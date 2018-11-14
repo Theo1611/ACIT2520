@@ -4,15 +4,14 @@ const request = require('request');
 const fs = require('fs');
 
 var app = express();
+var url = '';
 var getPhoto = () => {
 	return new Promise((resolve, reject) => {
 		request({
 			url: "https://jsonplaceholder.typicode.com/photos",
 			json: true
 		}, (error, response, body) => {
-			resolve({
-				photo: body[1].url
-			})
+			url = body[1].url;
 			}
 	)})
 };
@@ -29,10 +28,9 @@ hbs.registerHelper('getCurrentYear', () => {
 });
 
 hbs.registerHelper('fetchImage', () => {
-	getPhoto().then((result) => {
-		console.log(result.photo);
-		return result
-	})
+	getPhoto();
+	console.log(url);
+	return url
 });
 
 app.use((request, response, next) => {
@@ -41,12 +39,12 @@ app.use((request, response, next) => {
 	next();
 });
 
-app.use((request, response, next) => {
-	var time = new Date().toString();
-	response.render(('maintenance.hbs'), {
-		datetime: time
-	})
-})
+// app.use((request, response, next) => {
+// 	var time = new Date().toString();
+// 	response.render(('maintenance.hbs'), {
+// 		datetime: time
+// 	})
+// })
 
 app.get('/', (request, response) => {
 	response.render('index.hbs', {
