@@ -4,7 +4,7 @@ const request = require('request');
 const fs = require('fs');
 
 var app = express();
-var url = '';
+var url ='';
 var port = process.env.PORT || 8080;
 var getPhoto = () => {
 	return new Promise((resolve, reject) => {
@@ -12,7 +12,9 @@ var getPhoto = () => {
 			url: "https://jsonplaceholder.typicode.com/photos",
 			json: true
 		}, (error, response, body) => {
-			url = body[1].url;
+			resolve(
+				url = body[1].url
+			)
 			}
 	)})
 };
@@ -29,7 +31,7 @@ hbs.registerHelper('getCurrentYear', () => {
 });
 
 hbs.registerHelper('fetchImage', () => {
-	getPhoto();
+	getPhoto()
 	console.log(url);
 	return url
 });
